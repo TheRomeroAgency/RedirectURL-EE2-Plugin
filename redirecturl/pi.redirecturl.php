@@ -48,7 +48,9 @@ class Redirecturl {
 		$this->EE->load->helper('url');
 
 		$url = $this->EE->TMPL->fetch_param('url');
-		redirect(prep_url($url), 'location', 301);
+		$type = $this->EE->TMPL->fetch_param('type') ? intval($this->EE->TMPL->fetch_param('type')) : 301;
+
+		redirect(prep_url($url), 'location', $type);
 	}
 	
 	// ----------------------------------------------------------------
@@ -62,6 +64,9 @@ class Redirecturl {
 ?>
 
 {exp:redirecturl url="http://your_url.com"}
+
+Optional Parameters:
+type="302"
 
 <?php
 		$buffer = ob_get_contents();
